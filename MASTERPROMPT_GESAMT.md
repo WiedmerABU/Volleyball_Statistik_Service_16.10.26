@@ -150,3 +150,14 @@ Nicht relevante Felder ausblenden, ungültige Altwerte beim Wechsel zurücksetze
 17. Smartphone und Laptop getestet, Fokusanimation unaufdringlich, reduzierte Bewegung respektiert.
 
 **Umsetzungsdisziplin:** Bei jeder Release explizit zwischen **in Code vorhanden**, **getestet** und **nur spezifiziert** unterscheiden. Zielumfang nicht als implementiert behaupten. Keine Veränderung historischer Daten durch UI-Anpassungen.
+
+## Verbindliche Korrektur v0.4 – Startaufstellung Satz 2 bis 5
+
+- Nach jedem Satzgewinn bzw. -verlust, sofern das Match noch nicht durch drei Satzsiege beendet ist, öffnet «Nächsten Satz vorbereiten» die neue Satzaufstellung.
+- Die Positionen **4–3–2** (Netz) und **5–6–1** (Hinterfeld) werden direkt **in der perspektivischen Feldgrafik mit Blick von hinter der eigenen Grundlinie** als antippbare Felder angezeigt.
+- Für jede der sechs Positionen lässt sich eine Spielerin über ihre Trikotnummer aus dem **aktuellen Matchkader** auswählen. Namen und freiwillige Positionskürzel erscheinen sofort; die Auswahl für alle anderen Feldpositionen bleibt bestehen.
+- Jeder Satz besitzt eine unabhängig ausgewählte Startaufstellung. Die Felder sind beim Satzbeginn leer, nicht aus dem vorangegangenen Satz übernommen.
+- Doppelte Trikotnummern, Libera auf einer der sechs regulären Rotationspositionen sowie unvollständige Aufstellungen verhindern die Bestätigung.
+- «Aufstellung bestätigen» erzeugt genau einen neuen Satz und setzt dessen Rotation auf Basis der sechs gewählten Spielerinnen zurück, ohne frühere Aufstellungen und Statistiken zu verändern.
+- Satz 2, 3 und gegebenenfalls Satz 4 und 5 werden nur angelegt, solange keine Mannschaft drei Sätze gewonnen hat. Im Entscheidungssatz 5 wird das erste Aufschlagrecht nach erneuter Auslosung erfasst.
+- Dieselbe Grafik ist während des Satzes im Live-Game unter «Aktuelle Aufstellung ansehen» verfügbar und zeigt dort den tatsächlich aktuellen Rotations- und Wechselzustand, ohne ihn zu verändern.

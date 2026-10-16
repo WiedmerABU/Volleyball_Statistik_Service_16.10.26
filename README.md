@@ -1,31 +1,34 @@
-# VBC Interlaken – Service Statistik (Testversion 0.3)
+VBCI Service Statistik App – Update v0.5
+
+Enthält die vergrösserte blaue Feldgrafik, damit die Karten von Position 1, 2, 4 und 5 vollständig innerhalb des Feldes sichtbar sind.
+
+# VBC Interlaken – Service Statistik (Testversion 0.4)
 
 Responsive Web-App für Volleyball-Serviceerfassung. Installation über GitHub Pages.
 
 ## Installation im vorhandenen GitHub-Repository
 
-1. Vor dem Update bestehende Daten in **Teams → Daten sichern (JSON)** exportieren, falls möglich.
+1. Vor dem Update bestehende Daten in **Teams → Daten sichern (JSON)** exportieren.
 2. ZIP entpacken; **die einzelnen Dateien** in das Root-Verzeichnis des bestehenden GitHub-Repositories hochladen (nicht die ZIP selbst).
-3. Änderungen auf `main` committen. In GitHub `Settings → Pages → Deploy from a branch → main → /(root)` wählen (falls noch nicht aktiv).
-4. Deployment unter `Actions` kontrollieren; anschliessend die bereits bekannte GitHub-Pages-Adresse öffnen.
-5. Wenn die alte Ansicht erscheint, Browserseite hart aktualisieren. Auf Samsung über Chrome/Edge zum Startbildschirm hinzufügen.
+3. Änderungen auf `main` committen. GitHub Pages bleibt unter `Settings → Pages → Deploy from a branch → main → /(root)` aktiviert.
+4. Veröffentlichung unter `Actions` kontrollieren; dann die bestehende GitHub-Pages-Adresse öffnen.
+5. Bei alter Ansicht Seite neu laden bzw. auf Samsung Cache aktualisieren.
 
-## Neu in Version 0.3
+## Neu in Version 0.4
 
-- Aufstellung mit perspektivischer Volleyball-Feldgrafik, aus Sicht **hinter der eigenen Grundlinie**, in der Spielvorbereitung und im Live-Game.
-- VBCI-orientierte blaue Oberfläche, responsive verfeinert.
-- Bei `Neues Spiel` entfällt `Spielort`; erster Service wird erst bei `Aufstellung` gewählt.
-- Teamwahl im Screen `Neues Spiel` und automatische Vorauswahl der aktiven Teamspieler/-innen.
-- Grundlegende Zurück/Vorwärts-Funktion während eines laufenden Satzes.
+- **Fehler beim Erstellen von Satz 2 behoben:** Die Auswahl der sechs neuen Startspielerinnen wird bei jedem Eingabeschritt beibehalten.
+- **Satz 2, 3, 4 und ggf. 5:** Die sechs Aufstellungspositionen können nun direkt in der schematisch perspektivischen Feldgrafik mit Spielerinnen aus dem Matchkader besetzt werden.
+- Zu jeder Trikotnummer erscheinen Name und optionales Positionskürzel. Doppelte, fehlende oder unzulässige Auswahlen blockieren die Bestätigung.
+- Die Auswahl bleibt für jeden Satz unabhängig; frühere Satzstatistiken bleiben erhalten.
+- Die aktuelle Feldgrafik ist auch im Live-Game abrufbar.
 
-## Bekannte Einschränkungen (wichtig)
+## Bekannte Einschränkungen
 
-- **Testversion, nicht vollständig regelgeprüft.** Spielerwechsel und Rückwechsel sind noch nicht vollständig wettbewerbsregelkonform umgesetzt.
-- Die Verlaufsnavigation ist aktuell **satzbezogen**, nicht umfassend über Satzwechsel/Archivierung hinweg. Die im Masterprompt definierte vollständige Historie bleibt Entwicklungsziel.
-- Satz-5-Sonderregeln wie Seitenwechsel beim 8. Punkt sind noch nicht umfassend implementiert.
-- Die neue Feldgrafik ist eine **schematische 3D-artige Perspektive** (CSS), keine reale 3D-Spielsimulation.
-- Datenspeicherung ist lokal im Browser, **keine Geräte-Synchronisierung**. Browserspeicher nicht löschen; JSON-Backup anlegen.
-- Nicht alle im `MASTERPROMPT_GESAMT.md` beschriebenen Archiv- und UX-Funktionen sind schon eingebaut.
+- Testversion, **nicht vollständig regelgeprüft**. Spielerwechsel und Rückwechsel sind noch nicht wettbewerbsregelkonform vollständig implementiert.
+- Undo/Redo ist derzeit satzbezogen; satzübergreifende Historie ist noch nicht implementiert.
+- Entscheidungssatz: Der Seitenwechsel bei 8 Punkten wird noch nicht vollständig verwaltet.
+- Lokale Speicherung im Browser (localStorage), keine Synchronisation zwischen Geräten. JSON-Backups anlegen und Browserdaten nicht löschen.
+- Funktionen aus dem Gesamt-Masterprompt, beispielsweise erweiterte Archivstatistiken und neue Team-Dialoge, sind noch nicht vollständig umgesetzt.
 
 ## Dateien
 

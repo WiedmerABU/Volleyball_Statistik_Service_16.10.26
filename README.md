@@ -12,3 +12,9 @@ GitHub Pages: Alle Dateien aus diesem Paket direkt in das Root-Verzeichnis des b
 
 ## Wichtige Grenzen
 Die Daten werden lokal im jeweiligen Browser gespeichert, nicht automatisch zwischen Smartphone und Laptop synchronisiert. Bitte vor App-Updates im Bereich Teams eine JSON-Sicherung herunterladen. Spielerwechsel-/Rückwechsel-Regelprüfung, Satz-übergreifende Undo/Redo-Historie und realistische dreidimensionale Feldgrafik sind noch nicht vollständig umgesetzt. Die App ist eine Testversion, keine zertifizierte Wettkampfsoftware.
+
+## Hotfix v0.7.1
+Behebt eine leere App-Oberflaeche nach dem Laden: `draw()` wird beim Start aufgerufen. Vorhandene lokale Daten bleiben dabei unberuehrt.
+
+## Hotfix 0.7.1
+Behebt den weissen Hauptbereich nach dem Laden: der initiale Aufruf `draw()` wird nun ausgeführt. Bestehender lokaler Speicher bleibt unverändert.

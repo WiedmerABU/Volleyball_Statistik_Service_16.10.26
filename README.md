@@ -1,20 +1,15 @@
-# VBCI Service Statistik – Version 0.7 (Testversion)
+# VBCI Service Statistik – Hotfix 0.7.2
 
-GitHub Pages: Alle Dateien aus diesem Paket direkt in das Root-Verzeichnis des bestehenden GitHub-Repositories hochladen und committen. GitHub Pages: main / (root).
+## Behobenes Problem
+Weiße App-Oberfläche: verlässlicher Initialisierungsaufruf, Versionsanzeige, Cache-Busting für app.js und style.css und sichtbare Fehlermeldung, falls der Start fehlschlägt.
 
-## Änderungen gegenüber v0.6
-- Konsolidierter Masterprompt v0.7
-- Spielentwurf bleibt beim Navigieren zwischen Screens erhalten, bis ein Spiel eröffnet oder die Mannschaft gewechselt wird.
-- Manuelle Auswahl des Matchkaders: alle Personen zunächst abgewählt.
-- Keine Kaderübernahme in eine neue Saison.
-- Pulsierender Gegnername bei gegnerischem Service; bei eigenem Service Teamkarte und Spielerin.
-- Bereits vorhandene Feldgrafik, Teamkarten und Spielerwechsel weiterhin enthalten.
+## GitHub Pages
+Alle **acht Einzeldateien** direkt in den Repository-Hauptordner hochladen (nicht den ZIP-Ordner selbst). `index.html` und `app.js` müssen auf derselben Ebene liegen.
 
-## Wichtige Grenzen
-Die Daten werden lokal im jeweiligen Browser gespeichert, nicht automatisch zwischen Smartphone und Laptop synchronisiert. Bitte vor App-Updates im Bereich Teams eine JSON-Sicherung herunterladen. Spielerwechsel-/Rückwechsel-Regelprüfung, Satz-übergreifende Undo/Redo-Historie und realistische dreidimensionale Feldgrafik sind noch nicht vollständig umgesetzt. Die App ist eine Testversion, keine zertifizierte Wettkampfsoftware.
+**Achtung:** Frühere Hotfix-ZIP 0.7.1 enthielt versehentlich einen zusätzlichen, verschachtelten Ordner. Diesen bitte nicht hochladen. Version 0.7.2 enthält ausschliesslich die acht benötigten Dateien.
 
-## Hotfix v0.7.1
-Behebt eine leere App-Oberflaeche nach dem Laden: `draw()` wird beim Start aufgerufen. Vorhandene lokale Daten bleiben dabei unberuehrt.
+Nach Commit und erfolgreichem Pages-Deployment App-Link mit `?v=072` öffnen, zum Beispiel `https://BENUTZERNAME.github.io/vbci-service-statistik/?v=072`.
 
-## Hotfix 0.7.1
-Behebt den weissen Hauptbereich nach dem Laden: der initiale Aufruf `draw()` wird nun ausgeführt. Bestehender lokaler Speicher bleibt unverändert.
+Erwarteter sichtbarer Text im Header: **Version 0.7.2**.
+
+Wenn weiterhin ein Problem besteht, Fehlermeldung auf dem Bildschirm fotografieren und GitHub-Repository-Dateiliste prüfen. Vorhandene lokale Daten bleiben grundsätzlich erhalten; keine Browserdaten löschen.

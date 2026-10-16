@@ -1,6 +1,6 @@
 # VBC INTERLAKEN – GESAMT-MASTERPROMPT VOLLEYBALL-SERVICE-STATISTIK
 
-**Spezifikation 2.0 · 16.10.2026 · GitHub Pages / responsive Web-App**
+**Spezifikation 2.2 / UX-Review v0.7 · 16.10.2026 · GitHub Pages / responsive Web-App**
 
 ## 0. Entwicklungsauftrag und verbindliche Prioritäten
 
@@ -9,6 +9,23 @@ Entwickle eine moderne, robuste, intuitiv bedienbare Volleyball-Service-Statisti
 **Navigation exakt von links nach rechts:** **Teams | Neues Spiel | Live-Game | Archiv**. Auf Smartphone permanente Bottom Navigation mit Safe-Area-Abstand, auf Laptop adaptiv. Aktiven Screen hervorheben. Eigenes Team in allen Score- und Matchansichten links, Gegner rechts.
 
 **Qualität:** Primär Smartphone-Hochformat; grosse Touchflächen mindestens 44×44 px; optimale Kontraste, klare Zustandsanzeigen und bedienbare Buttons. Wichtiges wird durch **ruhiges, langsames Pulsieren** hervorgehoben, nie mehrere konkurrierende Animationen. `prefers-reduced-motion` respektieren. Keine Informationsüberladung. Alles mit wenigen Aktionen. Speichern nach jeder abgeschlossenen Änderung; Fehlbedienungen müssen konsistent korrigierbar sein. Farben exakt aus dem bereitgestellten Logo ableiten und als Design-Tokens zentral pflegen; nie das Logo verändern.
+
+## 0.1 End-to-End-Navigation ohne Sackgassen (höchste Priorität)
+
+**Alle Schritte haben einen sichtbaren Weiter- und Zurückweg.** Bei unvollständigen Pflichtangaben wird «Weiter» deaktiviert **und** direkt erklärt, welche Angabe fehlt; niemals eine leere Ansicht oder wirkungslose Schaltfläche anzeigen. Bei Seitenwechsel werden Entwürfe automatisch gespeichert. Ein «Abbrechen / Später fortsetzen» führt zur Übersicht «Neues Spiel» zurück, ohne gültige Daten zu vernichten. Es darf höchstens ein aktiv geöffnetes Live-Game je gewählter Sitzung geben; andere angefangene Matches bleiben als «Laufende Spiele» fortsetzbar.
+
+**Verbindlicher Erfolgsweg:**
+1. **Teams:** vorhandenes Team öffnen **oder** neues Team anlegen → Spielerinnen im fortlaufenden Dialog erfassen → «Zum neuen Spiel» (Team vorausgewählt; noch kein Match angelegt). Ohne Spielerinnen: Hinweis mit Button «Spielerinnen erfassen».
+2. **Neues Spiel / Spieldaten:** Mannschaftskarte wählen (verständlicher Teamname, niemals interne ID) → Gegner + Datum → «Weiter zum Matchkader». Zurück zu Teams möglich.
+3. **Neues Spiel / Matchkader:** Alle aktiven Spielerinnen sichtbar, **anfangs keine ausgewählt** → Teilnehmende einzeln ankreuzen, optional Gastspielerinnen → «Weiter zur Aufstellung». Bei weniger als 6 zulässigen Feldspielerinnen Hinweis und Button «Zum Matchkader»; die eingegebenen Daten bleiben erhalten.
+4. **Neues Spiel / Aufstellung Satz 1:** sechs unterschiedliche, gültige Nummern in der perspektivischen Feldgrafik wählen → ersten Service explizit festlegen → «Aufstellung bestätigen und Spiel eröffnen». Nur hier wird das eigentliche Match begonnen.
+5. **Live-Game:** Der aktive Servicezustand zeigt sofort die passenden grossen Aktionsbuttons. Spielerwechsel und «Aufstellung ansehen» sind jederzeit direkt erreichbar. «Zurück / Vorwärts» steht im Scorebereich. Laufendes Spiel darf verlassen werden; die App speichert und zeigt beim erneuten Öffnen «Spiel fortsetzen».
+6. **Satzende:** Grosse Ergebnisansicht mit Sieger und «Aufstellung Satz N+1 erstellen», **zusätzlich** «Satzverlauf ansehen / Korrektur» und «Spiel unterbrechen». Aufstellung Satz 2–5 wird **aus dem Matchkader** erstellt, vollständig neu und ohne Vorbelegung; danach direkt zum neuen Live-Satz. Bei 3 gewonnenen Sätzen: «Match abschliessen und Archiv öffnen» statt weiterer Satzaufstellung.
+7. **Archiv:** Neu archiviertes Spiel steht in der Liste, ist sofort aufrufbar; aus der Detailansicht über «Zurück zur Archivliste» zur Liste, von dort zu «Neues Spiel» oder «Teams». Ein vorzeitig archiviertes Match erhält eindeutig «Nicht abgeschlossen».
+
+**Grenzfälle:** Keine Mannschaft vorhanden → klarer Button «Team erstellen». Leerer Kader → «Spielerinnen hinzufügen». Kein Match offen → im Live-Game «Neues Spiel erstellen» und «Laufende Spiele öffnen». Bereits beendeter Satz → Ergebnis-/Korrekturansicht statt toter Servicebuttons. Ungültige Aufstellung → betroffene Positionskarte markieren und erläuternde Meldung. Spielerwechsel nicht möglich → begründen, zulässige Auswahl zeigen und «Schliessen» ermöglichen. Fehlender/defekter Datensatz → Fehler mit Rückweg, keinesfalls leere UI. Archiv löschen → Bestätigung, danach Rückkehr zur Liste.
+
+**Navigation:** Die vier Haupttabs bleiben jederzeit verfügbar; beim Verlassen von Dialogen/Schritten bleiben gültige Eingaben erhalten. Jeder Screen besitzt eine semantisch klare Überschrift und einen ersichtlichen nächsten sinnvollen Schritt. Nie automatisch ein neues Spiel aus einem versehentlichen Tippen anlegen.
 
 ## 1. Screen TEAMS – Stammdaten
 
@@ -35,7 +52,7 @@ Nicht relevante Felder ausblenden, ungültige Altwerte beim Wechsel zurücksetze
 
 - Pro Person Pflicht: Trikotnummer **0–99**, Vorname, Nachname. Freiwillige Standardrolle: `P` Passeuse / `A` Aussen / `M` Mitte / `D` Diagonal / `L` Libera/Libero / keine Angabe.
 - UI-Eingabe: schmaler Nummernblock, Vorname daneben, Nachname darunter, Position als antippbare Buchstaben. Kader nach Nummer sortiert; aktive Nummern eindeutig.
-- Personen hinzufügen, bearbeiten, deaktivieren/reaktivieren, Nummer/Rolle verändern; gesamten Kader in neue Saison kopieren und dann anpassen. Dauerhafte IDs.
+- Personen über einen kompakten, fortlaufenden Dialog hinzufügen (Nummer, Vorname/Name, freiwillige Position A/M/P/L/D); nach «Speichern und nächste Person» Felder leeren und Dialog offen halten; über «Erfassung beenden» schliessen. Personen bearbeiten und aus dem aktiven Kader nach Bestätigung entfernen. Die Funktion «Kader in neue Saison kopieren» ist vollständig entfernt (kein Button, kein Dialog, keine Kopierlogik). Dauerhafte Spieler-IDs. Historische Matches bleiben beim Entfernen vollständig erhalten.
 - **Historische Unveränderlichkeit:** Bei Änderung einer Trikotnummer werden nur künftige Matchkader aktualisiert. Schon eröffnete, laufende und archivierte Spiele zeigen weiterhin ihre ursprünglich gespeicherte Nummer, Namen und Rollen. Die Spieler-ID bleibt stabil und Match-Snapshots erhalten historische Daten.
 - Lokale Datensicherung JSON exportieren/importieren inkl. Versionsschema und Validierung. Keine automatische geräteübergreifende Synchronisierung behaupten.
 
@@ -49,7 +66,7 @@ Nicht relevante Felder ausblenden, ungültige Altwerte beim Wechsel zurücksetze
 
 ### 2.2 Matchkader
 
-- Nach Teamwahl werden **alle aktiven Personen automatisch vorausgewählt**. Nicht teilnehmende Personen mit einem Tipp abwählen. Bis zwei zusätzliche Gastspieler/-innen für das konkrete Match aufnehmen. Keine Veränderung am dauerhaften TEAM-Kader durch Änderungen im Matchkader.
+- Nach Teamwahl werden **alle aktiven Personen sichtbar, aber NICHT vorausgewählt**. Nur einzeln angetippte Personen werden dem Matchkader hinzugefügt. Jede teilnehmende Person wird bewusst einzeln ausgewählt; es gibt keine automatische Komplettübernahme. Bis zwei zusätzliche Gastspieler/-innen für das konkrete Match aufnehmen. Keine Veränderung am dauerhaften TEAM-Kader durch Änderungen im Matchkader.
 - Zu jedem Match werden historische Stammdaten kopiert. Rollen P/A/M/D/L können für das Match angepasst werden. Matchkader ist getrennt vom Teamkader gespeichert.
 
 ### 2.3 Startaufstellung und erster Service
@@ -122,6 +139,16 @@ Nicht relevante Felder ausblenden, ungültige Altwerte beim Wechsel zurücksetze
 - Aktive Eingabe deutlich markieren, Satzende prominent und nicht störend. Responsives Layout für Hochformat und Desktop. Bottom Navigation auf Smartphones fest, sichere Abstände bei Notches.
 - **Feldgrafik:** Perspektive von **hinter der Grundlinie des eigenen Teams**; perspektivisch kleiner werdendes Vorderfeld am Netz; klare Linien und Name/Nummer auf allen sechs Positionen. Positionen: Netzseite `4 / 3 / 2`, hintere Reihe `5 / 6 / 1`; Libera ausserhalb der sechs Positionen separat. Die Grafik muss auf Smartphone auch bei kleiner Breite lesbar bleiben. Datengetriebene Anzeige, keine hartcodierten Beispieldaten.
 
+## 5.1 Realistische Feldgrafik und Service-Pulsieren – verbindliches Redesign
+
+- **Perspektive:** Halb-realistische 3D-Court-Ansicht **von hinter der VBCI-Grundlinie**, Augenhöhe leicht erhöht, untere Grundlinie sichtbar, Netz am oberen Ende; blaue Spielfläche mit nachvollziehbarer Tiefe, korrekten Seitenlinien und Dreimeterlinie. Licht, Schatten und dezente Bodenstruktur vermitteln eine Sporthalle, ohne die Lesbarkeit einzuschränken.
+- **Karten in derselben Flucht:** Positionen 4–3–2 netznah und optisch weiter weg, Positionen 5–6–1 näher zum Betrachter. Spielerinnenkarten passen sich ihrer perspektivischen Lage an (Grösse/Flucht/Schatten); **alle sechs liegen vollständig innerhalb der blauen Feldbegrenzung**, mit gleichmässigem sichtbarem Abstand zu den Seitenlinien. Insbesondere Karten 1, 2, 4 und 5 dürfen niemals den Feldrand überschneiden.
+- **Karteninhalt:** Position, grosse Rückennummer, Name und optionales Rollen-Kürzel. Keine gequetschten Texte; bei kleinen Displays Vollbildansicht oder vergrösserbare Grafik. Libera separat ausserhalb des Spielfelds links unterhalb der Grafik.
+- **Aufstellungseditor:** Dieselbe Grafik im Screen «Neues Spiel → Aufstellung» bietet sechs direkt auswählbare Positionskarten (aus Matchkader), eindeutige Doppelbelegungsprüfung und sichtbaren Bestätigungsbutton. Im Live-Game dieselbe Grafik **schreibgeschützt**, ausser über den ausdrücklich ausgelösten Spielerwechsel.
+- **Servicepulsieren exakt:** **Eigenes Team serviert:** Nur die Teamnamen-Karte «VBC Interlaken» **und** die eigene aktuell servierende Spielerinnenkarte auf Position 1 pulsieren gleichzeitig langsam, synchron und dezent (ca. 1,8–2,2 Sekunden). **Gegner serviert:** Ausschliesslich die Teamnamen-Karte des Gegners pulsiert; **keine** eigene Spielerinnenkarte, auch nicht in der Feldgrafik. Die Scorezahlen selbst blinken nicht. Keine weiteren automatischen Blinkanimationen der normalen Navigation oder Buttons. Bei `prefers-reduced-motion` statische Rahmen plus «Am Service»-Text verwenden.
+- **Live-Game-Tasten:** Ass und Normal links **unter der eigenen Teamspalte**, Fehler rechts **unter der Gegnerspalte**; die aktuelle Aufschlagspielerin steht zentral gross und bleibt gut erkennbar. Bei Gegner-Service «+ Punkt eigenes Team» links, «+ Punkt Gegner» rechts. Alle Tasten mindestens 44×44 px und mit ausreichendem Abstand.
+- **Realismus ohne Regelfehler:** Die Grafik zeigt die *Rotationsaufstellung*, nicht tatsächliche Laufwege der Spielerinnen nach dem Aufschlag. Für Responsive-Umsetzung bevorzugt skalierbares SVG/transformierte CSS- oder Canvas-Elemente mit exakt daran gekoppelten interaktiven Hitboxes. Kein unleserliches starres Hintergrundbild mit bloss darübergelegten Karten.
+
 ## 6. Architektur, Migration und GitHub Pages
 
 - Browser-Web-App, statisch auf GitHub Pages lauffähig (keine Secrets im Client). HTML/CSS/JS oder entsprechender statischer Build. Dateien `index.html`, `app.js`, `style.css`, `logo.png`, `manifest.webmanifest`, `icon.svg`, `README.md`, dieser Masterprompt direkt ins Root-Repository.
@@ -136,7 +163,7 @@ Nicht relevante Felder ausblenden, ungültige Altwerte beim Wechsel zurücksetze
 3. Nummernänderung in TEAMS verändert weder laufende noch archivierte Matches; zukünftige Matches übernehmen neue Nummer.
 4. In `Neues Spiel > Spieldaten` **kein Spielort und keine Erstservice-Auswahl**.
 5. In `Neues Spiel > Aufstellung` 1. Service exklusiv auswählbar und bestätigt.
-6. Matchkader übernimmt zunächst **alle aktiven** Personen; Personen abwählbar.
+6. Matchkader zeigt alle aktiven Personen zunächst **abgewählt**; nur manuell gewählte Personen sind dabei. Beim Teamwechsel Auswahl zurücksetzen und vor Verlust eines bereits bearbeiteten Entwurfs warnen.
 7. Aufstellung Satz 2–5 unabhängig aus Matchkader; automatische Namensauflösung, doppelte Nummern gesperrt.
 8. Aufstellung sowohl im Aufstellungsschritt als auch live aus Trainerperspektive **hinter der Grundlinie** sichtbar; exakt 4/3/2 und 5/6/1.
 9. Eigener Service: Ass / Normal (+ Ergebnis) / Fehler korrekt; Gegner-Ansicht bleibt nach gegnerischem Punkt.
@@ -161,3 +188,10 @@ Nicht relevante Felder ausblenden, ungültige Altwerte beim Wechsel zurücksetze
 - «Aufstellung bestätigen» erzeugt genau einen neuen Satz und setzt dessen Rotation auf Basis der sechs gewählten Spielerinnen zurück, ohne frühere Aufstellungen und Statistiken zu verändern.
 - Satz 2, 3 und gegebenenfalls Satz 4 und 5 werden nur angelegt, solange keine Mannschaft drei Sätze gewonnen hat. Im Entscheidungssatz 5 wird das erste Aufschlagrecht nach erneuter Auslosung erfasst.
 - Dieselbe Grafik ist während des Satzes im Live-Game unter «Aktuelle Aufstellung ansehen» verfügbar und zeigt dort den tatsächlich aktuellen Rotations- und Wechselzustand, ohne ihn zu verändern.
+
+## Verbindliche Ergänzung v0.6 (historisch; bei Widersprüchen gelten die bereinigten Regeln oben)
+- TEAM: bestehende Teams als verständlich beschriftete, auswählbare Karten statt technischer IDs; separate Ansicht „Neues Team erstellen“. Spielerinnen fortlaufend über Dialog erfassen und bei bestehenden Teams bearbeiten/löschen, dabei historische Matchdaten erhalten.
+- NEUES SPIEL: zuerst bestehendes Team auswählen. Alle Spielerinnen beginnen **abgewählt**; nur manuell ausgewählte Spielerinnen gehören zum Matchkader. Ein Wechsel der Mannschaft setzt den Entwurf/Matchkader bewusst zurück.
+- LIVE-GAME: Ass und Normal links neben der zentralen Aufschlagspielerin, Fehler rechts; Spielerwechsel-Button immer sichtbar; Wechsel nur aus aktuellem Matchkader.
+- SERVICE-ANIMATION: bei eigenem Service pulsieren Teamkarte und Spielerin auf Position 1; bei gegnerischem Service nur die Gegner-Teamkarte. Reduzierte Bewegung respektieren.
+- FELDGRAFIK: perspektivisch nach hinten fluchtendes blaues Spielfeld aus Sicht der VBCI-Grundlinie, sechs Karten vollständig innerhalb des Feldes mit einheitlichem Abstand und visueller Ausrichtung.

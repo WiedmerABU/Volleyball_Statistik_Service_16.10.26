@@ -1,35 +1,14 @@
-VBCI Service Statistik App – Update v0.5
+# VBCI Service Statistik – Version 0.7 (Testversion)
 
-Enthält die vergrösserte blaue Feldgrafik, damit die Karten von Position 1, 2, 4 und 5 vollständig innerhalb des Feldes sichtbar sind.
+GitHub Pages: Alle Dateien aus diesem Paket direkt in das Root-Verzeichnis des bestehenden GitHub-Repositories hochladen und committen. GitHub Pages: main / (root).
 
-# VBC Interlaken – Service Statistik (Testversion 0.4)
+## Änderungen gegenüber v0.6
+- Konsolidierter Masterprompt v0.7
+- Spielentwurf bleibt beim Navigieren zwischen Screens erhalten, bis ein Spiel eröffnet oder die Mannschaft gewechselt wird.
+- Manuelle Auswahl des Matchkaders: alle Personen zunächst abgewählt.
+- Keine Kaderübernahme in eine neue Saison.
+- Pulsierender Gegnername bei gegnerischem Service; bei eigenem Service Teamkarte und Spielerin.
+- Bereits vorhandene Feldgrafik, Teamkarten und Spielerwechsel weiterhin enthalten.
 
-Responsive Web-App für Volleyball-Serviceerfassung. Installation über GitHub Pages.
-
-## Installation im vorhandenen GitHub-Repository
-
-1. Vor dem Update bestehende Daten in **Teams → Daten sichern (JSON)** exportieren.
-2. ZIP entpacken; **die einzelnen Dateien** in das Root-Verzeichnis des bestehenden GitHub-Repositories hochladen (nicht die ZIP selbst).
-3. Änderungen auf `main` committen. GitHub Pages bleibt unter `Settings → Pages → Deploy from a branch → main → /(root)` aktiviert.
-4. Veröffentlichung unter `Actions` kontrollieren; dann die bestehende GitHub-Pages-Adresse öffnen.
-5. Bei alter Ansicht Seite neu laden bzw. auf Samsung Cache aktualisieren.
-
-## Neu in Version 0.4
-
-- **Fehler beim Erstellen von Satz 2 behoben:** Die Auswahl der sechs neuen Startspielerinnen wird bei jedem Eingabeschritt beibehalten.
-- **Satz 2, 3, 4 und ggf. 5:** Die sechs Aufstellungspositionen können nun direkt in der schematisch perspektivischen Feldgrafik mit Spielerinnen aus dem Matchkader besetzt werden.
-- Zu jeder Trikotnummer erscheinen Name und optionales Positionskürzel. Doppelte, fehlende oder unzulässige Auswahlen blockieren die Bestätigung.
-- Die Auswahl bleibt für jeden Satz unabhängig; frühere Satzstatistiken bleiben erhalten.
-- Die aktuelle Feldgrafik ist auch im Live-Game abrufbar.
-
-## Bekannte Einschränkungen
-
-- Testversion, **nicht vollständig regelgeprüft**. Spielerwechsel und Rückwechsel sind noch nicht wettbewerbsregelkonform vollständig implementiert.
-- Undo/Redo ist derzeit satzbezogen; satzübergreifende Historie ist noch nicht implementiert.
-- Entscheidungssatz: Der Seitenwechsel bei 8 Punkten wird noch nicht vollständig verwaltet.
-- Lokale Speicherung im Browser (localStorage), keine Synchronisation zwischen Geräten. JSON-Backups anlegen und Browserdaten nicht löschen.
-- Funktionen aus dem Gesamt-Masterprompt, beispielsweise erweiterte Archivstatistiken und neue Team-Dialoge, sind noch nicht vollständig umgesetzt.
-
-## Dateien
-
-`index.html`, `app.js`, `style.css`, `logo.png`, `icon.svg`, `manifest.webmanifest`, `MASTERPROMPT_GESAMT.md`, `README.md`.
+## Wichtige Grenzen
+Die Daten werden lokal im jeweiligen Browser gespeichert, nicht automatisch zwischen Smartphone und Laptop synchronisiert. Bitte vor App-Updates im Bereich Teams eine JSON-Sicherung herunterladen. Spielerwechsel-/Rückwechsel-Regelprüfung, Satz-übergreifende Undo/Redo-Historie und realistische dreidimensionale Feldgrafik sind noch nicht vollständig umgesetzt. Die App ist eine Testversion, keine zertifizierte Wettkampfsoftware.

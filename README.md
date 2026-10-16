@@ -1,23 +1,32 @@
-# VBC Interlaken – Service-Statistik (Testversion 0.2)
+# VBC Interlaken – Service Statistik (Testversion 0.3)
 
-GitHub-Pages-fähige Web-App. Hauptnavigation **Teams | Neues Spiel | Live-Game | Archiv** (links nach rechts); responsive für Smartphone und Laptop.
+Responsive Web-App für Volleyball-Serviceerfassung. Installation über GitHub Pages.
 
-## Aktualisierung eines bestehenden GitHub-Repositories
+## Installation im vorhandenen GitHub-Repository
 
-1. ZIP auf dem Laptop entpacken. **Nicht** das ZIP selbst hochladen.
-2. Repository `vbci-service-statistik` öffnen → **Add file → Upload files**.
-3. Alle App-Dateien im Hauptverzeichnis hochladen, bestehende Dateien ersetzen und **Commit changes** bestätigen. Die im Paket mitgelieferte Spezifikation kann ebenfalls hochgeladen werden.
-4. Unter **Settings → Pages**: Branch `main`, Ordner `/(root)`; die Veröffentlichung unter **Actions** prüfen.
-5. Website auf dem Smartphone öffnen und im Browser **Zum Startbildschirm hinzufügen** wählen.
+1. Vor dem Update bestehende Daten in **Teams → Daten sichern (JSON)** exportieren, falls möglich.
+2. ZIP entpacken; **die einzelnen Dateien** in das Root-Verzeichnis des bestehenden GitHub-Repositories hochladen (nicht die ZIP selbst).
+3. Änderungen auf `main` committen. In GitHub `Settings → Pages → Deploy from a branch → main → /(root)` wählen (falls noch nicht aktiv).
+4. Deployment unter `Actions` kontrollieren; anschliessend die bereits bekannte GitHub-Pages-Adresse öffnen.
+5. Wenn die alte Ansicht erscheint, Browserseite hart aktualisieren. Auf Samsung über Chrome/Edge zum Startbildschirm hinzufügen.
 
-## Datensicherung vor jedem Update
+## Neu in Version 0.3
 
-In der bisherigen App unter **Team(s) → Daten sichern (JSON)** eine Sicherung exportieren. Den Browser-Speicher **nicht** löschen. Die App verwendet bewusst denselben lokalen Speicherschlüssel wie Version 0.1. Browser- und Gerätewechsel synchronisieren Daten nicht automatisch.
+- Aufstellung mit perspektivischer Volleyball-Feldgrafik, aus Sicht **hinter der eigenen Grundlinie**, in der Spielvorbereitung und im Live-Game.
+- VBCI-orientierte blaue Oberfläche, responsive verfeinert.
+- Bei `Neues Spiel` entfällt `Spielort`; erster Service wird erst bei `Aufstellung` gewählt.
+- Teamwahl im Screen `Neues Spiel` und automatische Vorauswahl der aktiven Teamspieler/-innen.
+- Grundlegende Zurück/Vorwärts-Funktion während eines laufenden Satzes.
 
-## Status und Einschränkungen
+## Bekannte Einschränkungen (wichtig)
 
-Diese ZIP enthält eine **lauffähige Testversion** und den überarbeiteten **Ziel-Masterprompt**. Nicht alle Spezifikationsanforderungen sind bereits programmiert. Insbesondere sind Spielerwechsel noch nicht vollständig auf Regelkonformität geprüft, der Matchentwurf wird nicht dauerhaft gespeichert, die Archivanalysen sind vereinfacht und die App nutzt `localStorage` statt der für spätere Ausbaustufen empfohlenen IndexedDB. Vor realen Wettbewerbsspielen fachlich testen.
+- **Testversion, nicht vollständig regelgeprüft.** Spielerwechsel und Rückwechsel sind noch nicht vollständig wettbewerbsregelkonform umgesetzt.
+- Die Verlaufsnavigation ist aktuell **satzbezogen**, nicht umfassend über Satzwechsel/Archivierung hinweg. Die im Masterprompt definierte vollständige Historie bleibt Entwicklungsziel.
+- Satz-5-Sonderregeln wie Seitenwechsel beim 8. Punkt sind noch nicht umfassend implementiert.
+- Die neue Feldgrafik ist eine **schematische 3D-artige Perspektive** (CSS), keine reale 3D-Spielsimulation.
+- Datenspeicherung ist lokal im Browser, **keine Geräte-Synchronisierung**. Browserspeicher nicht löschen; JSON-Backup anlegen.
+- Nicht alle im `MASTERPROMPT_GESAMT.md` beschriebenen Archiv- und UX-Funktionen sind schon eingebaut.
 
 ## Dateien
 
-`index.html`, `app.js`, `style.css`, `logo.png`, `icon.svg`, `manifest.webmanifest`, `README.md`, `MASTERPROMPT_GESAMT.md`.
+`index.html`, `app.js`, `style.css`, `logo.png`, `icon.svg`, `manifest.webmanifest`, `MASTERPROMPT_GESAMT.md`, `README.md`.
